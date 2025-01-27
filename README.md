@@ -1,1 +1,0 @@
-# kinseylong.github.io
