@@ -5,22 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kinsey Long</title>
     <link rel="stylesheet" href="index_styles.css"> <!-- Link to your CSS file -->
+        <style>
+            /* Shadowed panel for hero text */
+            #hero{ display:flex; justify-content:center; }
+            .hero-box {
+                display: block;
+                background: rgba(0,0,0,0.6);
+                padding: 28px 36px;
+                border-radius: 10px;
+                box-shadow: none;
+                color: #fff;
+                max-width: 900px;
+                margin: 60px auto;
+            }
+               .hero-inner {
+                   display: grid;
+                   grid-template-columns: 220px 1fr;
+                   /* make the middle row flexible so we can vertically center the nav */
+                   grid-template-rows: auto 1fr auto;
+                   gap: 12px 36px;
+                   align-items: start;
+               }
+               .hero-photo{grid-row:1;grid-column:1;display:flex;align-items:center;justify-content:center}
+               .hero-nav-container{grid-row:2;grid-column:2;margin-top:8px;text-align:left;display:flex;flex-direction:row;align-items:center;gap:12px;align-self:center}
+               .hero-photo img{width:180px;height:180px;object-fit:cover;border-radius:8px;border:none}
+               .links-title{display:none}
+               .hero-nav{margin-top:0;text-align:left}
+               .hero-nav a{display:inline-block;margin-right:14px;color:#9b91c6}
+               .hero-heading{grid-column:2;grid-row:1;align-self:center}
+               .hero-heading p{margin:0;color:#cfc9dd}
+               .hero-heading h1{margin:6px 0 0 0;font-size:2rem}
+               .hero-body{grid-column:2;grid-row:3;min-width:0}
+               .hero-body p{margin-top:0;color:#ddd;line-height:1.5}
+               @media (max-width:700px){
+                   .hero-box { padding:20px; width:100%; box-shadow: 0 10px 24px rgba(0,0,0,0.55); }
+                .hero-inner{grid-template-columns:1fr;grid-template-rows:auto auto auto auto;gap:12px}
+                .hero-photo{grid-column:1;grid-row:1;justify-content:center}
+                .hero-heading{grid-column:1;grid-row:2}
+                .hero-nav-container{grid-column:1;grid-row:3;flex-direction:row;justify-content:center}
+                .hero-body{grid-column:1;grid-row:4}
+               }
+        </style>
 </head>
 <body>
-    <section id="hero">
-        <p> Hello, my name is </p>
-        <h1>Kinsey Long. </h1>
-        <p><br></p>
-        <nav style="margin: 32px 0;">
-          <a href="science.html">Science</a> |
-          <a href="photography.html">Art</a> |
-          <a href="writing.html">Writing</a>
-        </nav>
-        <p>This page is still in progress. Check back soon!</p>
-    </section>
+        <section id="hero">
+            <div class="hero-box">
+                <div class="hero-inner">
+                            <div class="hero-photo">
+                                <img src="images/headshot.jpeg" alt="Kinsey Long headshot">
+                            </div>
+                            <div class="hero-heading">
+                                <p> Hello, my name is </p>
+                                <h1>Kinsey Long.</h1>
+                            </div>
+                            <div class="hero-nav-container">
+                                <div class="links-title">Links</div>
+                                <nav class="hero-nav">
+                                    <a href="https://bsky.app/profile/kinseylong.bsky.social">Bluesky</a>|
+                                    <a href="https://scholar.google.com/citations?hl=en&user=CodTnGEAAAAJ">Google Scholar</a>|
+                                    <a href="https://www.instagram.com/clayinthebay/">Ceramics</a>|
+                                    <a href="photography.html">Photography</a>|
+                                    <a href="mycats.html">Cats</a>
+                                </nav>
+                            </div>
+                            <div class="hero-body">
+                                <p><br>I'm a <a href="https://qb3.berkeley.edu/biophysics/">Biophysics</a> PhD student at UC Berkeley in <a href="https://www.banfieldlab.com/">Jill Banfield's lab</a>.
+                                    My research interests broadly lie in understanding the sequence-to-structure evolutionary landscape of proteins, particularly those found in exciting microbes from diverse environments.
+
+                                    <br><br> I completed my B.Sc. at UC Berkeley in Chemical Biology, with a double minor in Data Science and Bioengineering. As an undergraduate, I developed functional annotation methods for uncharacterized fungal and algal proteins at the <a href="https://jgi.doe.gov/">Joint Genome Institute</a>. 
+                                    I also pursued chemical biology research in the <a href="https://www.mbfberkeley.com/">Francis Lab</a> and at <a href="https://aralezbio.com/">Aralez Bio</a>. 
+                                    Prior to starting graduate school, I spent a wonderful summer working at the <a href="https://www.airc.aist.go.jp/en/">Artificial Intelligence Research Institute</a> in Tokyo, Japan.
+
+                                    <br><br> I grew up in Hong Kong and now reside in the beautiful San Francisco Bay Area. My hobbies include making ceramics, hiking and playing board games.
+
+                                    <br><br> Feel free to contact me via email (kinsey at berkeley dot edu), <a href="https://www.linkedin.com/in/kinsey-long/">LinkedIn</a> or <a href="https://bsky.app/profile/kinseylong.bsky.social">Bluesky</a>!
+                                    
+                                </p>
+                            </div>
+                        </div>
+            </div>
+        </section>
 
     <footer>
-        &copy; 2025 Kinsey Long
+        &copy; 2026 Kinsey Long
     </footer>
 </body>
 </html>

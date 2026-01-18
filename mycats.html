@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>My Cats — Kinsey Long</title>
+	<link rel="stylesheet" href="index_styles.css">
+</head>
+<body class="mycats">
+	<nav class="navbar">
+		<div class="nav-title">Kinsey Long</div>
+		<button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+		<div class="nav-links">
+			<a href="index.html">Home</a>
+			<a href="https://bsky.app/profile/kinseylong.bsky.social">Bluesky</a>
+			<a href="https://www.instagram.com/clayinthebay/">Ceramics</a>
+			<a href="photography.html">Photography</a>
+			<a href="mycats.html">Cats</a>
+		</div>
+	</nav>
+
+	<main class="container">
+        <br><br>
+		<section class="intro">
+			<h2>Java & Juno</h2>
+			<p>Two hungry cats. Follow us on Instagram! <a href="https://www.instagram.com/thecalcats/">@thecalcats</a></p>
+		</section>
+		<figure>
+			<img src="images/mycats/cattree.png" alt="Cats on a cat tree">
+			<figcaption>Full cat tree</figcaption>
+		</figure>
+
+		<figure>
+			<img src="images/mycats/destruction.png" alt="Java tearing up cardboard box">
+			<figcaption>Java tears up a box</figcaption>
+		</figure>
+
+		<figure>
+			<img src="images/mycats/sleeping.png" alt="Cat curled up">
+			<figcaption>Juno posing as a shrimp</figcaption>
+		</figure>
+	</main>
+
+	<footer>
+		<p>&copy; 2026 Kinsey Long</p>
+	</footer>
+
+	<script>
+		// Mobile nav toggle for mycats
+		(function(){
+			const toggle = document.querySelector('.navbar .nav-toggle');
+			const links = document.querySelector('.navbar .nav-links');
+			const nav = document.querySelector('.navbar');
+			if (!toggle || !links || !nav) return;
+
+			// set a CSS variable with the current navbar height so CSS spacing can use it
+			function updateNavHeight(){
+				const h = nav.offsetHeight || 56;
+				document.documentElement.style.setProperty('--nav-h', h + 'px');
+			}
+			updateNavHeight();
+			window.addEventListener('resize', updateNavHeight);
+
+			toggle.addEventListener('click', function(){
+				const open = links.classList.toggle('open');
+				document.body.classList.toggle('nav-open', open);
+				updateNavHeight();
+				toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+			});
+			// close menu when a link is clicked
+			links.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{ links.classList.remove('open'); document.body.classList.remove('nav-open'); toggle.setAttribute('aria-expanded','false'); updateNavHeight(); }));
+			// remove open state when resizing to desktop
+			window.addEventListener('resize', function(){ if (window.innerWidth > 700) { links.classList.remove('open'); document.body.classList.remove('nav-open'); toggle.setAttribute('aria-expanded','false'); updateNavHeight(); } });
+		})();
+	</script>
+</body>
+</html>
