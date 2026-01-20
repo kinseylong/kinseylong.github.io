@@ -4,49 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kinsey's Photography</title>
+  <link rel="stylesheet" href="index_styles.css">
   <style>
-    .navbar {
-      width: 100vw;
-      background: #181818;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 32px;
-      height: 56px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1002;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    .navbar .nav-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      margin-right: 48px;
-      font-family: 'Andale Mono', monospace;
-    }
-    .navbar .nav-links {
-      display: flex;
-      gap: 24px;
-    }
-    .navbar .nav-links a {
-      color: #9b91c6;
-      text-decoration: none;
-      font-size: 1rem;
-      opacity: 0.8;
-      transition: opacity 0.2s;
-      font-family: 'Andale Mono', monospace;
-    }
-    .navbar .nav-links a:hover {
-      opacity: 1;
-      text-decoration: none;
-    }
-    .portfolio-slideshow {
-      margin-top: 56px;
-      font-family: 'Andale Mono', monospace;
-    }
+    /* Removed page-local .navbar rules so the shared .site-navbar from index_styles.css is used */
+  .portfolio-slideshow { font-family: 'Lucida Console', monospace; }
     .slide-content {
       position: absolute;
       left: 0;
@@ -69,19 +30,19 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s;
-      font-family: 'Andale Mono', monospace;
+  font-family: 'Lucida Console', monospace;
     }
     .slide-title {
       font-size: 1.3rem;
       font-weight: 600;
       margin-bottom: 18px;
       letter-spacing: 1px;
-      font-family: 'Andale Mono', monospace;
+  font-family: 'Lucida Console', monospace;
     }
     .slide-caption {
       font-size: 1.05rem;
       color: #ccc;
-      font-family: 'Andale Mono', monospace;
+  font-family: 'Lucida Console', monospace;
     }
     .slide:hover .slide-content {
       opacity: 1;
@@ -93,7 +54,7 @@
       margin: 0;
       background: #111;
       color: #fff;
-      font-family: 'Andale Mono', monospace;
+  font-family: 'Lucida Console', monospace;
       overflow-x: hidden;
     }
     .portfolio-slideshow {
@@ -197,14 +158,15 @@
   </style>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="nav-title">Kinsey Long</div>
+  <nav class="site-navbar" role="navigation" style="background:#181818">
+    <div class="nav-left"><div class="nav-title">Kinsey Long</div></div>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
     <div class="nav-links">
-		  <a href="index.html">Home</a>
+      <a href="index.html">Home</a>
       <a href="https://bsky.app/profile/kinseylong.bsky.social">Bluesky</a>
       <a href="https://www.instagram.com/clayinthebay/">Ceramics</a>
       <a href="photography.html">Photography</a>
-			<a href="mycats.html">Cats</a>
+      <a href="mycats.html">Cats</a>
     </div>
   </nav>
   <div class="portfolio-slideshow" id="portfolio-slideshow">
@@ -301,6 +263,18 @@
     });
     // Initial render
     showSlide(0);
+  </script>
+  <script>
+    (function(){
+      const nav = document.querySelector('.site-navbar');
+      if(!nav) return;
+      const toggle = nav.querySelector('.nav-toggle');
+      const links = nav.querySelector('.nav-links');
+      function updateNavHeight(){ const h = nav.offsetHeight || 64; document.documentElement.style.setProperty('--nav-h', h + 'px'); }
+      updateNavHeight(); window.addEventListener('resize', updateNavHeight);
+      if(toggle){ toggle.addEventListener('click', ()=>{ const open = links.classList.toggle('open'); document.body.classList.toggle('nav-open', open); toggle.setAttribute('aria-expanded', open ? 'true':'false'); updateNavHeight(); }); }
+      links.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{ links.classList.remove('open'); document.body.classList.remove('nav-open'); if(toggle) toggle.setAttribute('aria-expanded','false'); updateNavHeight(); }));
+    })();
   </script>
 </body>
 </html>

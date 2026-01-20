@@ -8,8 +8,8 @@
 	<link rel="stylesheet" href="index_styles.css">
 </head>
 <body class="mycats">
-	<nav class="navbar">
-		<div class="nav-title">Kinsey Long</div>
+	<nav class="site-navbar" role="navigation">
+		<div class="nav-left"><div class="nav-title">Kinsey Long</div></div>
 		<button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
 		<div class="nav-links">
 			<a href="index.html">Home</a>
@@ -21,7 +21,6 @@
 	</nav>
 
 	<main class="container">
-        <br><br>
 		<section class="intro">
 			<h2>Java & Juno</h2>
 			<p>Two hungry cats. Follow us on Instagram! <a href="https://www.instagram.com/thecalcats/">@thecalcats</a></p>
@@ -40,6 +39,27 @@
 			<img src="images/mycats/sleeping.png" alt="Cat curled up">
 			<figcaption>Juno posing as a shrimp</figcaption>
 		</figure>
+
+        <figure>
+			<img src="images/mycats/pianist.png" alt="Java sitting">
+			<figcaption>Java on the keyboard</figcaption>
+		</figure>
+        <figure>
+			<img src="images/mycats/napping.png" alt="Juno napping">
+			<figcaption>Sleeping co-worker</figcaption>
+		</figure>
+        <figure>
+			<img src="images/mycats/arielview.png" alt="Juno from above">
+			<figcaption>Juno from above</figcaption>
+		</figure>
+        <figure>
+			<img src="images/mycats/pastafiend.png" alt="Java sniffing pasta">
+			<figcaption>Java wants pasta</figcaption>
+		</figure>
+        <figure>
+			<img src="images/mycats/tv.png" alt="watching TV">
+			<figcaption>What's on TV?</figcaption>
+		</figure>
 	</main>
 
 	<footer>
@@ -47,32 +67,16 @@
 	</footer>
 
 	<script>
-		// Mobile nav toggle for mycats
-		(function(){
-			const toggle = document.querySelector('.navbar .nav-toggle');
-			const links = document.querySelector('.navbar .nav-links');
-			const nav = document.querySelector('.navbar');
-			if (!toggle || !links || !nav) return;
-
-			// set a CSS variable with the current navbar height so CSS spacing can use it
-			function updateNavHeight(){
-				const h = nav.offsetHeight || 56;
-				document.documentElement.style.setProperty('--nav-h', h + 'px');
-			}
-			updateNavHeight();
-			window.addEventListener('resize', updateNavHeight);
-
-			toggle.addEventListener('click', function(){
-				const open = links.classList.toggle('open');
-				document.body.classList.toggle('nav-open', open);
-				updateNavHeight();
-				toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-			});
-			// close menu when a link is clicked
-			links.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{ links.classList.remove('open'); document.body.classList.remove('nav-open'); toggle.setAttribute('aria-expanded','false'); updateNavHeight(); }));
-			// remove open state when resizing to desktop
-			window.addEventListener('resize', function(){ if (window.innerWidth > 700) { links.classList.remove('open'); document.body.classList.remove('nav-open'); toggle.setAttribute('aria-expanded','false'); updateNavHeight(); } });
-		})();
+	(function(){
+	  const nav = document.querySelector('.site-navbar');
+	  if(!nav) return;
+	  const toggle = nav.querySelector('.nav-toggle');
+	  const links = nav.querySelector('.nav-links');
+	  function updateNavHeight(){ const h = nav.offsetHeight || 64; document.documentElement.style.setProperty('--nav-h', h + 'px'); }
+	  updateNavHeight(); window.addEventListener('resize', updateNavHeight);
+	  if(toggle){ toggle.addEventListener('click', ()=>{ const open = links.classList.toggle('open'); document.body.classList.toggle('nav-open', open); toggle.setAttribute('aria-expanded', open ? 'true':'false'); updateNavHeight(); }); }
+	  links.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{ links.classList.remove('open'); document.body.classList.remove('nav-open'); if(toggle) toggle.setAttribute('aria-expanded','false'); updateNavHeight(); }));
+	})();
 	</script>
 </body>
 </html>

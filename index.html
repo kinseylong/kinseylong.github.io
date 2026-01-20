@@ -27,27 +27,47 @@
                    align-items: start;
                }
                .hero-photo{grid-row:1;grid-column:1;display:flex;align-items:center;justify-content:center}
-               .hero-nav-container{grid-row:2;grid-column:2;margin-top:8px;text-align:left;display:flex;flex-direction:row;align-items:center;gap:12px;align-self:center}
+               .hero-nav-container{grid-row:2;grid-column:2;margin-top:8px;text-align:justify;display:flex;flex-direction:row;align-items:center;gap:12px;align-self:center}
                .hero-photo img{width:180px;height:180px;object-fit:cover;border-radius:8px;border:none}
                .links-title{display:none}
-               .hero-nav{margin-top:0;text-align:left}
+               .hero-nav{margin-top:0;text-align:justify}
                .hero-nav a{display:inline-block;margin-right:14px;color:#9b91c6}
                .hero-heading{grid-column:2;grid-row:1;align-self:center}
                .hero-heading p{margin:0;color:#cfc9dd}
                .hero-heading h1{margin:6px 0 0 0;font-size:2rem}
-               .hero-body{grid-column:2;grid-row:3;min-width:0}
-               .hero-body p{margin-top:0;color:#ddd;line-height:1.5}
+                             .hero-body{
+                                 grid-column:2;
+                                 grid-row:3;
+                                 min-width:0;
+                                 max-width: 720px; /* constrain the text block width */
+                                 justify-self: center; /* center the block within the second column */
+                                 text-align: justify; /* justify text inside the block */
+                             }
+                             .hero-body p{margin-top:0;color:#ddd;line-height:1.5; text-align:justify}
                @media (max-width:700px){
                    .hero-box { padding:20px; width:100%; box-shadow: 0 10px 24px rgba(0,0,0,0.55); }
                 .hero-inner{grid-template-columns:1fr;grid-template-rows:auto auto auto auto;gap:12px}
                 .hero-photo{grid-column:1;grid-row:1;justify-content:center}
                 .hero-heading{grid-column:1;grid-row:2}
                 .hero-nav-container{grid-column:1;grid-row:3;flex-direction:row;justify-content:center}
-                .hero-body{grid-column:1;grid-row:4}
+                .hero-body{grid-column:1;grid-row:4; justify-self: stretch; max-width: none; }
                }
         </style>
 </head>
 <body>
+    <nav class="site-navbar" role="navigation">
+        <div class="nav-left">  
+            <div class="nav-title">Kinsey Long</div>
+        </div>
+        <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="https://bsky.app/profile/kinseylong.bsky.social">Bluesky</a>
+            <a href="https://www.instagram.com/clayinthebay/">Ceramics</a>
+            <a href="photography.html">Photography</a>
+            <a href="mycats.html">Cats</a>
+        </div>
+    </nav>
         <section id="hero">
             <div class="hero-box">
                 <div class="hero-inner">
@@ -58,19 +78,9 @@
                                 <p> Hello, my name is </p>
                                 <h1>Kinsey Long.</h1>
                             </div>
-                            <div class="hero-nav-container">
-                                <div class="links-title">Links</div>
-                                <nav class="hero-nav">
-                                    <a href="https://bsky.app/profile/kinseylong.bsky.social">Bluesky</a>|
-                                    <a href="https://scholar.google.com/citations?hl=en&user=CodTnGEAAAAJ">Google Scholar</a>|
-                                    <a href="https://www.instagram.com/clayinthebay/">Ceramics</a>|
-                                    <a href="photography.html">Photography</a>|
-                                    <a href="mycats.html">Cats</a>
-                                </nav>
-                            </div>
                             <div class="hero-body">
                                 <p><br>I'm a <a href="https://qb3.berkeley.edu/biophysics/">Biophysics</a> PhD student at UC Berkeley in <a href="https://www.banfieldlab.com/">Jill Banfield's lab</a>.
-                                    My research interests broadly lie in understanding the sequence-to-structure evolutionary landscape of proteins, particularly those found in exciting microbes from diverse environments.
+                                    My research interests broadly lie in understanding the sequence-to-structure evolutionary landscape of proteins, particularly those found in microbes from diverse environments.
 
                                     <br><br> I completed my B.Sc. at UC Berkeley in Chemical Biology, with a double minor in Data Science and Bioengineering. As an undergraduate, I developed functional annotation methods for uncharacterized fungal and algal proteins at the <a href="https://jgi.doe.gov/">Joint Genome Institute</a>. 
                                     I also pursued chemical biology research in the <a href="https://www.mbfberkeley.com/">Francis Lab</a> and at <a href="https://aralezbio.com/">Aralez Bio</a>. 
@@ -90,4 +100,16 @@
         &copy; 2026 Kinsey Long
     </footer>
 </body>
+<script>
+(function(){
+    const nav = document.querySelector('.site-navbar');
+    if(!nav) return;
+    const toggle = nav.querySelector('.nav-toggle');
+    const links = nav.querySelector('.nav-links');
+    function updateNavHeight(){ const h = nav.offsetHeight || 64; document.documentElement.style.setProperty('--nav-h', h + 'px'); }
+    updateNavHeight(); window.addEventListener('resize', updateNavHeight);
+    if(toggle){ toggle.addEventListener('click', ()=>{ const open = links.classList.toggle('open'); document.body.classList.toggle('nav-open', open); toggle.setAttribute('aria-expanded', open ? 'true':'false'); updateNavHeight(); }); }
+    links.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{ links.classList.remove('open'); document.body.classList.remove('nav-open'); if(toggle) toggle.setAttribute('aria-expanded','false'); updateNavHeight(); }));
+})();
+</script>
 </html>
